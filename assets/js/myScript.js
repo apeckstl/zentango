@@ -1,9 +1,25 @@
 //TODO: allow them to choose a size
-var zentangleSize = 2;
+const zentangleSize = 2;
+const type = "circles";
 
-var imagewidth = 800 / zentangleSize;
+/*
+1.80, 120, 40
+2. 40, 170, 95
+3. 200, 200, 50
+4. 260, 160, 40
+5. 210, 40, 75
+6. 160, 40, 60
+*/
 
-var imagearray = new Array(zentangleSize * zentangleSize);
+if (type == 'grid') {
+    var imagewidth = 800 / zentangleSize;
+    var imagearray = new Array(zentangleSize * zentangleSize);
+} else if (type == 'circles') {
+    var centers = [[120,160],[135,265],[250,250],[300,200],[285,115],[220,100]]
+    var radii = [40,95,50,40,75,60]
+}
+
+
 var imageindex = 0;
 
 var mode = "draw";
@@ -44,6 +60,14 @@ function init() {
     canvas.addEventListener("mouseout", function (e) {
         findxy('out', e)
     }, false);
+
+    if (type == 'circles') {
+        for (let i = 0; i < 6; i++) {
+            ctx.beginPath();
+            ctx.arc(centers[i][0], centers[i][1], radii[i], 0, 2 * Math.PI);
+            ctx.stroke(); 
+        }
+    }
 }
 
 function draw() {
