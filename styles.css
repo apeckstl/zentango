@@ -1,3 +1,9 @@
+/* Eggshell: #F4F1DE | Terra Cotta: #E07A5F | Indepedence: #3D405B | Green Sheen: #81B29A | Deep Champagne: #F2CC8F */
+
+body {
+    /* background-color: #adc178; */
+}
+
 #canvas {
     position:relative;
     border:2px solid;
