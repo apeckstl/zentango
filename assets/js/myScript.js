@@ -16,9 +16,11 @@ function start() {
 
     var select = document.getElementById("chunk-count");
     zentangleSize = Math.sqrt(select.value);
-    const a = document.createElement('a');
-    a.href = "./draw/index.html?type=" + type + "&size=" + zentangleSize;
-    a.click();
+    //const a = document.createElement('a');
+    //a.id = "startbutton";
+    window.location.href = "./draw/index.html?type=" + type + "&size=" + zentangleSize;
+    return;
+    //a.click();
     
 }
 
@@ -33,7 +35,7 @@ function start() {
 
 
 var imagearray;
-var centers, radii, xes, yes, circlestart, circleend;
+var centers, radii, xes, yes, circlestart, circleend, shapes;
 var imagewidth;
 
 var imageindex = 0;
@@ -108,7 +110,9 @@ function init() {
         // for each shape, we need a two item array of the circles that compose it. for each circle, we need
         // x, y, radius, start, end, direction
         shapes = [
-            [[centers[0][0],centers[0][1],40*2.5,0.8235*Math.PI,0.087*(Math.PI)],[]],
+            [[centers[0][0],centers[0][1],40*2.5,0.8235*Math.PI,0.087*(Math.PI)],
+            [centers[1][0]+21,centers[1][1]+152,95*2.5,1.58*(Math.PI),1.331*Math.PI,true]],
+
             [[],[]]
         ]
 
@@ -128,8 +132,8 @@ function drawShape() {
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.lineWidth = width;
-    ctx.arc(xes[imageindex*2], yes[imageindex*2], radii[imageindex*2], circlestart[imageindex*2], circleend[imageindex*2]);
-    ctx.arc(xes[imageindex*2+1], yes[imageindex*2+1], radii[imageindex*2+1], circlestart[imageindex*2+1], circleend[imageindex*2+1],true);
+    ctx.arc(shapes[imageindex][0][0],shapes[imageindex][0][1],shapes[imageindex][0][2],shapes[imageindex][0][3],shapes[imageindex][0][4],shapes[imageindex][0][5]);
+    ctx.arc(shapes[imageindex][1][0],shapes[imageindex][1][1],shapes[imageindex][1][2],shapes[imageindex][1][3],shapes[imageindex][1][4],shapes[imageindex][1][5]);
     ctx.stroke();
 
     ctx.clip();
