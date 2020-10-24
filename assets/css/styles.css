@@ -1,0 +1,86 @@
+/* Eggshell: #F4F1DE | Terra Cotta: #E07A5F | Indepedence: #3D405B | Green Sheen: #81B29A | Deep Champagne: #F2CC8F */
+
+body, html {
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+	padding-top: 10px;
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+form h3 {
+	font-size: 1em;
+	text-align: center;
+}
+
+.form-check {
+	margin-bottom: 15px;
+}
+.form-control {
+	width: 100%;
+	text-align: center;
+}
+
+#canvas {
+    position:relative;
+    border:5px solid;
+    background-color: #FFF;
+}
+
+#zentangle {
+    position: absolute;
+    display: none;
+
+}
+
+button {
+    position: relative;
+}
+
+img {
+    width: 300px;
+    border: 1px solid;
+}
+
+label img {
+	border: 0px;
+	border-radius: 5px;
+	margin: 0 1px 0 1px;
+	width: 75px;
+}
+
+#save_zentangle {
+    display: none;
+}
+
+.card {
+	width: 50%;
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+	cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+	box-shadow: 0 0 0 2pt #80dfff;
+}
