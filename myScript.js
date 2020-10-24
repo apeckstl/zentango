@@ -52,7 +52,11 @@ function nextImage() {
     imagearray[imageindex] = dataURL;
     if (++imageindex == imagearray.length) {
         console.log("finished");
-        generateImage();
+        generateSquareImage();
+        document.getElementById("canvas").style.display = "none";
+        document.getElementById("next_image").style.display = "none";
+        document.getElementById("zentangle").style.display = "block";
+        document.getElementById("save_zentangle").style.display = "inline";
     } else {
         ctx.clearRect(0, 0, w, h);
     }
@@ -67,7 +71,7 @@ function save() {
     a.click();
 }
 
-function generateImage() {
+function generateSquareImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
 
     for (i = 0; i < zentangleSize; i++) {
@@ -81,6 +85,26 @@ function generateImage() {
             img.src = imagearray[i * zentangleSize + j];
         }
     }
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'black';
+    for (i = 1; i < zentangleSize; i++) {
+        ctx.beginPath();       // Start a new path
+        ctx.moveTo(i*imagewidth, 0);    // Move the pen to (30, 50)
+        ctx.lineTo(i*imagewidth, 800);  // Draw a line to (150, 100)
+        ctx.stroke();          // Render the path
+    }
+    for (i = 1; i < zentangleSize; i++) {
+        ctx.beginPath();       // Start a new path
+        ctx.moveTo(0,i*imagewidth);    // Move the pen to (30, 50)
+        ctx.lineTo(800,i*imagewidth);  // Draw a line to (150, 100)
+        ctx.stroke();          // Render the path
+    }
+
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.rect(0, 0, 800, 800);
+    ctx.stroke();
+
     document.getElementById("save_zentangle").removeAttribute("disabled");
 
 }

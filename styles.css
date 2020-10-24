@@ -5,7 +5,7 @@
 
 #zentangle {
     position: absolute;
-    display: inline-block;
+    display: none;
 
 }
 
@@ -16,4 +16,8 @@ button {
 img {
     width: 300px;
     border: 1px solid;
+}
+
+#save_zentangle {
+    display: none;
 }
