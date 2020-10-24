@@ -1,4 +1,4 @@
-#can {
+#canvas {
     position:relative;
     border:2px solid;
 }
@@ -6,7 +6,6 @@
 #zentangle {
     position: absolute;
     display: inline-block;
-    width: 700px;
 
 }
 

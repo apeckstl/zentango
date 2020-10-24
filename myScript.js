@@ -14,7 +14,7 @@ var imageindex = 0;
         y = 2;
     
     function init() {
-        canvas = document.getElementById('can');
+        canvas = document.getElementById('canvas');
         ctx = canvas.getContext("2d");
         w = canvas.width;
         h = canvas.height;
@@ -59,11 +59,18 @@ var imageindex = 0;
     }
 
     function generateImage() {
-        for (i = 0; i < imagearray.length; i++) {
-            let img = document.createElement('img');
-            img.id = 'image_' + i; 
-            img.src = imagearray[i];
-            document.getElementById("zentangle").appendChild(img);
+        var ctx = document.getElementById('zentangle').getContext('2d');
+        
+        for (i = 0; i < 2; i++) {
+            for (j = 0; j < 2; j++) {
+                var img = new Image();
+                img.setAtX = i*400;
+                img.setAtY = j*400;
+                img.onload = function() {
+                    ctx.drawImage(this, this.setAtX, this.setAtY, 400, 400);
+                }
+                img.src = imagearray[i*2+j];
+            }
         }
         
     }
