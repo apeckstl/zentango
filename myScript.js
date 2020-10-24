@@ -53,7 +53,10 @@ function nextImage() {
     if (++imageindex == imagearray.length) {
         console.log("finished");
         generateSquareImage();
-        document.getElementById("zentangle").style.display = "none";
+        document.getElementById("canvas").style.display = "none";
+        document.getElementById("next_image").style.display = "none";
+        document.getElementById("zentangle").style.display = "block";
+        document.getElementById("save_zentangle").style.display = "inline";
     } else {
         ctx.clearRect(0, 0, w, h);
     }
