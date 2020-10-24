@@ -1,10 +1,28 @@
 //TODO: allow them to choose a size
-var zentangleSize = 2;
+const zentangleSize = 2;
+const type = "circles";
 
-var imagewidth = 800/zentangleSize;
+/*
+1.80, 120, 40
+2. 40, 170, 95
+3. 200, 200, 50
+4. 260, 160, 40
+5. 210, 40, 75
+6. 160, 40, 60
+*/
 
-var imagearray = new Array(zentangleSize*zentangleSize);
+if (type == 'grid') {
+    var imagewidth = 800 / zentangleSize;
+    var imagearray = new Array(zentangleSize * zentangleSize);
+} else if (type == 'circles') {
+    var centers = [[120,160],[135,265],[250,250],[300,200],[285,115],[220,100]]
+    var radii = [40,95,50,40,75,60]
+}
+
+
 var imageindex = 0;
+
+var mode = "draw";
 
 var canvas, zentangle, ctx, flag = false,
     prevX = 0,
@@ -13,8 +31,16 @@ var canvas, zentangle, ctx, flag = false,
     currY = 0,
     dot_flag = false;
 
-var x = "black",
-    y = 2;
+var color = "black",
+    width = 2;
+
+function drawStyle(style) {
+    mode = style;
+}
+
+function drawWidth(w) {
+    width = w;
+}
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -34,34 +60,44 @@ function init() {
     canvas.addEventListener("mouseout", function (e) {
         findxy('out', e)
     }, false);
+
+    if (type == 'circles') {
+        for (let i = 0; i < 6; i++) {
+            ctx.beginPath();
+            ctx.arc(centers[i][0], centers[i][1], radii[i], 0, 2 * Math.PI);
+            ctx.stroke(); 
+        }
+    }
 }
 
 function draw() {
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
-    ctx.strokeStyle = x;
-    ctx.lineWidth = y;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
     ctx.stroke();
     ctx.closePath();
 }
 
-
 function nextImage() {
     var dataURL = canvas.toDataURL();
     imagearray[imageindex] = dataURL;
-    if (++imageindex == imagearray.length) {
-        console.log("finished");
+    if (++imageindex == imagearray.length) { // last image
+        // TODO: eventually call other functions for different templates
         generateSquareImage();
+        // hide and display the elements on the page
         document.getElementById("canvas").style.display = "none";
         document.getElementById("next_image").style.display = "none";
         document.getElementById("zentangle").style.display = "block";
         document.getElementById("save_zentangle").style.display = "inline";
     } else {
+        // reset drawing canvas
         ctx.clearRect(0, 0, w, h);
     }
 }
 
+// Saves the zentangle to the user's computer
 function save() {
     zentangle = document.getElementById('zentangle');
     const data = zentangle.toDataURL('image/png');
@@ -85,51 +121,62 @@ function generateSquareImage() {
             img.src = imagearray[i * zentangleSize + j];
         }
     }
+
+    /*
+    * Draw grid lines between squares, vertical and then horizontal
+    */
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'black';
     for (i = 1; i < zentangleSize; i++) {
         ctx.beginPath();       // Start a new path
-        ctx.moveTo(i*imagewidth, 0);    // Move the pen to (30, 50)
-        ctx.lineTo(i*imagewidth, 800);  // Draw a line to (150, 100)
+        ctx.moveTo(i * imagewidth, 0);    // Move the pen
+        ctx.lineTo(i * imagewidth, 800);  // Draw a line
         ctx.stroke();          // Render the path
     }
     for (i = 1; i < zentangleSize; i++) {
         ctx.beginPath();       // Start a new path
-        ctx.moveTo(0,i*imagewidth);    // Move the pen to (30, 50)
-        ctx.lineTo(800,i*imagewidth);  // Draw a line to (150, 100)
+        ctx.moveTo(0, i * imagewidth);    // Move the pen
+        ctx.lineTo(800, i * imagewidth);  // Draw a line
         ctx.stroke();          // Render the path
     }
-
+    /*
+    * Draw a border around the zentangle
+    */
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.rect(0, 0, 800, 800);
     ctx.stroke();
 
-    document.getElementById("save_zentangle").removeAttribute("disabled");
-
 }
 
 function findxy(res, e) {
+    // on mouse press, record current coordinates in currX/Y
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
         currX = e.clientX - canvas.offsetLeft;
         currY = e.clientY - canvas.offsetTop;
 
-        flag = true;
-        dot_flag = true;
-        if (dot_flag) {
-            ctx.beginPath();
-            ctx.fillStyle = x;
-            ctx.fillRect(currX, currY, 2, 2);
-            ctx.closePath();
-            dot_flag = false;
+        //turn on flag for continuous draw
+        if (mode == 'draw') {
+            flag = true;
         }
     }
+
+    if (res == 'up' && mode == 'line') {
+        //release draws the straight line
+        prevX = currX;
+        prevY = currY;
+        currX = e.clientX - canvas.offsetLeft;
+        currY = e.clientY - canvas.offsetTop;
+        draw();
+    }
     if (res == 'up' || res == "out") {
+        // stop dragging the line
         flag = false;
     }
-    if (res == 'move') {
+    if (res == 'move' && mode == 'draw') {
+        //draw a new segment on each mouse move
         if (flag) {
             prevX = currX;
             prevY = currY;
