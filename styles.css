@@ -1,0 +1,20 @@
+#can {
+    position:relative;
+    border:2px solid;
+}
+
+#zentangle {
+    position: absolute;
+    display: inline-block;
+    width: 700px;
+
+}
+
+.btn {
+    position: relative;
+}
+
+img {
+    width: 300px;
+    border: 1px solid;
+}

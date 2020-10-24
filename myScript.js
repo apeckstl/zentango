@@ -1,70 +1,100 @@
-window.onload = () => {
-    const canvas = document.getElementById('canvas');
-    const saveButton = document.getElementById('save');
-    const loadInput = document.getElementById('load');
-  
-    new Drawing(canvas, saveButton, loadInput);
-  };
-  
-  class Drawing {
-    constructor(canvas, saveButton, loadInput) {
-      this.isDrawing = false;
-  
-      canvas.addEventListener('mousedown', () => this.startDrawing());
-      canvas.addEventListener('mousemove', (event) => this.draw(event));
-      canvas.addEventListener('mouseup', () => this.stopDrawing());
-  
-      saveButton.addEventListener('click', () => this.save());
-      loadInput.addEventListener('change', (event) => this.load(event));
-  
-      const rect = canvas.getBoundingClientRect();
-  
-      this.offsetLeft = rect.left;
-      this.offsetTop = rect.top;
-  
-      this.canvas = canvas;
-      this.context = this.canvas.getContext('2d');
+
+
+var imagearray = new Array(4);
+var imageindex = 0;
+
+    var canvas, ctx, flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var x = "black",
+        y = 2;
+    
+    function init() {
+        canvas = document.getElementById('can');
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+    
+        canvas.addEventListener("mousemove", function (e) {
+            findxy('move', e)
+        }, false);
+        canvas.addEventListener("mousedown", function (e) {
+            findxy('down', e)
+        }, false);
+        canvas.addEventListener("mouseup", function (e) {
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
     }
-    startDrawing() {
-      this.isDrawing = true;
+    
+    function draw() {
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.stroke();
+        ctx.closePath();
     }
-    stopDrawing() {
-      this.isDrawing = false;
+    
+    
+    function save() {
+        var dataURL = canvas.toDataURL();
+        imagearray[imageindex] = dataURL;
+        if (++imageindex == imagearray.length) {
+            console.log("finished");
+            generateImage();
+        } else {
+            var m = confirm("Move on to next drawing?");
+            if (m) {
+                ctx.clearRect(0, 0, w, h);
+            }
+        }
     }
-    draw(event) {
-      if (this.isDrawing) {
-        this.context.fillRect(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, 2, 2);
-      }
+
+    function generateImage() {
+        for (i = 0; i < imagearray.length; i++) {
+            let img = document.createElement('img');
+            img.id = 'image_' + i; 
+            img.src = imagearray[i];
+            document.getElementById("zentangle").appendChild(img);
+        }
+        
     }
-    save() {
-      const data = this.canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = data;
-      a.download = 'image.png';
-      a.click();
+    
+    function findxy(res, e) {
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                ctx.fillRect(currX, currY, 2, 2);
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                draw();
+            }
+        }
     }
-    load(event) {
-      const file = [...event.target.files].pop();
-      this.readTheFile(file)
-        .then((image) => this.loadTheImage(image))
-    }
-    loadTheImage(image) {
-      const img = new Image();
-      const canvas = this.canvas;
-      img.onload = function () {
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(img, 0, 0);
-      };
-      img.src = image;
-    }
-    readTheFile(file) {
-      const reader = new FileReader();
-      return new Promise((resolve) => {
-        reader.onload = (event) => {
-          resolve(event.target.result);
-        };
-        reader.readAsDataURL(file);
-      })
-    }
-  }

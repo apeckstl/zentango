@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
 
-    <meta charset="UTF-8">
+<head>
 
-  </head>
-  <body>
-    
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-<div class="container">
-  <div>
-    <canvas id="canvas" width="500" height="500"></canvas>
+<body onload="init()">
+
+
+  <canvas id="can" width="400" height="400"></canvas>
+  <input type="button" value="save" id="btn" size="30" onclick="save()">
+  <div id="zentangle">
+
   </div>
-  <div>
-    <button id="save" type="button">
-      save
-    </button>
-    <input
-      type="file"
-      id="load"
-      name="avatar"
-      accept="image/png"
-    >
-  </div>
-</div>
 
+  <script src="myScript.js"></script>
+</body>
 
-    <script src="myScript.js"></script> 
-  </body>
 </html>
