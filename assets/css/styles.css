@@ -1,13 +1,44 @@
 /* Eggshell: #F4F1DE | Terra Cotta: #E07A5F | Indepedence: #3D405B | Green Sheen: #81B29A | Deep Champagne: #F2CC8F */
+:root {
+	/* color schemes */
+	--eggshell: #F4F1DE;
+	--terra-cotta: #E07A5F;
+	--independence: #3D405B;
+	--green-sheen: #81B29A;
+	--deep-champagne: #F2CC8F;
+
+	/* main	 */
+	--background: var(--terra-cotta);
+	--foreground: var(--green-sheen);
+}
 
 body, html {
     height: 100%;
+	background-color: var(--green-sheen);
 }
 
 .container-fluid {
     width: 100%;
 	padding-top: 10px;
-	background-color: darkorchid;
+	background-color: var(--green-sheen);
+}
+
+.btn-info {
+	color: black;
+	background-color: var(--deep-champagne);
+}
+
+.color-pallete {
+	position: relative;
+	display: inline-block;
+}
+
+.blah {
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
 }
 
 h1 {
@@ -24,6 +55,11 @@ form h3 {
 	text-align: center;
 }
 
+.btn-group-vertical {
+	margin-right: 20px;
+	width: 40px;
+}
+
 .form-check {
 	margin-bottom: 15px;
 }
@@ -34,8 +70,9 @@ form h3 {
 
 #canvas {
     position:relative;
-    border:5px solid;
+    border:3px solid;
     background-color: #FFF;
+	box-shadow: 0 10px 10px 2px rgba(68,68,68,0.6);
 }
 
 #zentangle {
@@ -58,6 +95,13 @@ label img {
 	border-radius: 5px;
 	margin: 0 1px 0 1px;
 	width: 75px;
+}
+button img {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	width: 20px;
+	height: 20px;
 }
 
 #save_zentangle {

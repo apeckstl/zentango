@@ -14,33 +14,39 @@
 	<body onload="init()">
 
 	<div class="container-fluid h-100">
-		<div class="row h-100 justify-content-center align-items-center">
+		<div class="row justify-content-center" style="padding: 50px 0 50px 0;">
+			<h1 class="blahh">Zentango</h1>
+		</div>
 
+		<div class="row justify-content-center align-items-center">
 			<div class="col d-flex justify-content-end pr-0">
 				<div class="btn-group-vertical">
-					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Dropdown
-					  </button>
-					  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="#">Dropdown link</a>
-						<a class="dropdown-item" href="#">Dropdown link</a>
-					  </div>
-					<button class="btn btn-info mb-3" id="next_image" onclick="nextImage()">Next Image</button>
-					<button class="btn btn-info" id="next_image" onclick="nextImage()">Next Image</button>
+					<button class="btn btn-info mb-3"><img src="../assets/images/paint-brush.svg" /></button>
+					<button class="btn btn-info mb-3"><img src="../assets/images/diagonal-line.svg" /></button>
+					<button class="btn btn-info mb-3"><img src="../assets/images/diagonal-line.svg" /></button>
+					<div class="color-palette">	
+						<button type="button" class="btn btn-info"></button>
+						<input  type="color" class="blah" value="#ff0000"/> 
+					</div>
+
+
+					<button id="paint-colors" type="button" class="btn btn-secondary dropdown-toggle mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+					<div class="dropdown-menu" aria-labelledby="paint-colors">
+						<a class="dropdown-item" href="#"></a>
+						<a class="dropdown-item" href="#"></a>
+					</div>
 				</div>
 			</div>
 
-			<div class="col d-flex justify-content-center", id="canvas-col">
+			<div class="col d-flex justify-content-center" id="canvas-col">
 				<canvas id="canvas" width="400" height="400"></canvas>
 				<canvas id="zentangle" width="800" height="800"></canvas>
 			</div>
 			
-			<div class="col">
-
-			</div>
+			<div class="col"></div>
 		</div>
 
-		<div class="row align-items-center justify-content-center">
+		<div class="row align-items-center justify-content-center" style="padding-top: 30px;">
 			<button class="btn btn-info" id="next_image" onclick="nextImage()">Next Image</button>
 			<button class="btn btn-info" id="save_zentangle" onclick="save()">Save Your Zentangle</button>
 		</div>
