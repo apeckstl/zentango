@@ -1,7 +1,12 @@
-var imagearray = new Array(4);
+//TODO: allow them to choose a size
+var zentangleSize = 2;
+
+var imagewidth = 800/zentangleSize;
+
+var imagearray = new Array(zentangleSize*zentangleSize);
 var imageindex = 0;
 
-var canvas, ctx, flag = false,
+var canvas, zentangle, ctx, flag = false,
     prevX = 0,
     currX = 0,
     prevY = 0,
@@ -42,34 +47,41 @@ function draw() {
 }
 
 
-function save() {
+function nextImage() {
     var dataURL = canvas.toDataURL();
     imagearray[imageindex] = dataURL;
     if (++imageindex == imagearray.length) {
         console.log("finished");
         generateImage();
     } else {
-        var m = confirm("Move on to next drawing?");
-        if (m) {
-            ctx.clearRect(0, 0, w, h);
-        }
+        ctx.clearRect(0, 0, w, h);
     }
+}
+
+function save() {
+    zentangle = document.getElementById('zentangle');
+    const data = zentangle.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = data;
+    a.download = 'zentangle.png';
+    a.click();
 }
 
 function generateImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
 
-    for (i = 0; i < 2; i++) {
-        for (j = 0; j < 2; j++) {
+    for (i = 0; i < zentangleSize; i++) {
+        for (j = 0; j < zentangleSize; j++) {
             var img = new Image();
-            img.setAtX = i * 400;
-            img.setAtY = j * 400;
+            img.setAtX = i * imagewidth;
+            img.setAtY = j * imagewidth;
             img.onload = function () {
-                ctx.drawImage(this, this.setAtX, this.setAtY, 400, 400);
+                ctx.drawImage(this, this.setAtX, this.setAtY, imagewidth, imagewidth);
             }
-            img.src = imagearray[i * 2 + j];
+            img.src = imagearray[i * zentangleSize + j];
         }
     }
+    document.getElementById("save_zentangle").removeAttribute("disabled");
 
 }
 
