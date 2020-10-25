@@ -1,36 +1,16 @@
-//TODO: allow them to choose a size
+// default size and type
 zentangleSize = 2;
 var type = "circle";
 
-function start() {
-    var radios = document.getElementsByName("template-radio");
-    for (var i = 0, length = radios.length; i < length; i++) {
-        if (radios[i].checked) {
-          // do whatever you want with the checked radio
-          type = radios[i].value;
-          console.log("type " + type)
-          // only one radio can be logically checked, don't check the rest
-          break;
-        }
-    }
-
-    var select = document.getElementById("chunk-count");
-    zentangleSize = Math.sqrt(select.value);
-    //const a = document.createElement('a');
-    //a.id = "startbutton";
-    window.location.href = "./draw/index.html?type=" + type + "&size=" + zentangleSize;
-    return;
-    //a.click();
-    
-}
-
+// array to hold image sources
 var imagearray;
-var centers, radii, shapes, zen_offsets;
 var imagewidth;
-
 var imageindex = 0;
 
-var mode = "draw";
+// default mode
+var mode = "draw",
+    color = "black",
+    width = 2;
 
 var canvas, zentangle, ctx, flag = false,
     prevX = 0,
@@ -39,9 +19,25 @@ var canvas, zentangle, ctx, flag = false,
     currY = 0,
     dot_flag = false;
 
-var color = "black",
-    width = 2;
+function start() {
+    // find type that user checked
+    var radios = document.getElementsByName("template-radio");
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            type = radios[i].value;
+            break;
+        }
+    }
 
+    var select = document.getElementById("chunk-count");
+    zentangleSize = Math.sqrt(select.value);
+
+    //redirect to drawing page with url parameters
+    window.location.href = "./draw/index.html?type=" + type + "&size=" + zentangleSize;
+    
+}
+
+// button functions for draw tools
 function drawStyle(style) {
     mode = style;
 }
@@ -50,11 +46,11 @@ function drawWidth(w) {
     width = w;
 }
 
-
 function setColor() {
 	color = document.getElementById('color-btn').value;
 }
 
+// yank url parameters 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -62,7 +58,7 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-
+// add listeners to canvas and create image arrays
 function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext("2d");
@@ -96,11 +92,12 @@ function init() {
     }
 }
 
+// given the current index, draw the corresponding irregular shape for the circle zentangle
 function drawShape() {
     ctx.beginPath();
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
-    console.log(imageindex);
+    // draw all the curves in the shape
     for (i = 0; i < shapes[imageindex].length; i++) {
         ctx.arc(shapes[imageindex][i][0],shapes[imageindex][i][1],shapes[imageindex][i][2],shapes[imageindex][i][3],shapes[imageindex][i][4],shapes[imageindex][i][5]);
     }
@@ -108,6 +105,7 @@ function drawShape() {
     ctx.clip();
 }
 
+// draw a line from previous to current point, used in line and draw modes
 function draw() {
     setWeight();
 	setColor();
@@ -120,15 +118,14 @@ function draw() {
     ctx.closePath();
 }
 
+// on click for the "Next Image" button, save the image to the array, and move to generation at the end
 function nextImage() {
     type = getParameterByName("type");
     zentangleSize = getParameterByName("size");
     var dataURL = canvas.toDataURL();
     imagearray[imageindex] = dataURL;
-    console.log("imageindex" + imageindex)
     
     if (++imageindex == imagearray.length) { // last image
-        // TODO: eventually call other functions for different templates
         if (type == "square") {
             generateSquareImage();
         } else {
@@ -148,7 +145,7 @@ function nextImage() {
     } else {
         // reset drawing canvas
         canvas.width = 400;
-        if (type == "circle") {
+        if (type == "circle") { //draw next shape
             drawShape();
         }
     }
@@ -164,12 +161,13 @@ function save() {
     a.click();
 }
 
+// compose the image using the offsets and images
 function generateCircleImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
+    //make background white
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,800,800);
     for (let i = 0; i < imagearray.length; i++) {
-            console.log("drawing")
             var img = new Image();
             img.onload = function () {
                 ctx.drawImage(this, zen_offsets[i][0], zen_offsets[i][1], imagewidth, imagewidth);
@@ -179,6 +177,7 @@ function generateCircleImage() {
     }
 }
 
+// compose the grid zentangle using the imagearray
 function generateSquareImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
     ctx.fillStyle = "white" ;
@@ -234,8 +233,6 @@ function findxy(res, e) {
     heightDiff  = canvascol.height - mt + mb - canvas.height;
     newX = canvascol.x + widthDiff/2 ; 
     newY = canvascol.y + heightDiff/2;
-    // console.log(ml, mt, mr, mb);
-    // console.log(widthDiff, heightDiff);
 
     // on mouse press, record current coordinates in currX/Y
     if (res == 'down') {
