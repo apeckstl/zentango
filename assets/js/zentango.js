@@ -133,8 +133,9 @@ function nextImage() {
         }
         
         // change the bootstrap classes for alignment            
-        document.getElementById("canvas-col").className = "col d-flex justify-content-center"
-        document.getElementById("tools-div").className = "my-auto"
+        document.getElementById("canvas-col").className = "col d-flex justify-content-center";
+        document.getElementById("canvas-col").style.marginRight = "0px";
+        document.getElementById("tools-div").className = "my-auto";
         // hide and display the elements on the page
         document.getElementById("canvas").style.display = "none";
         document.getElementById("next_image").style.display = "none";
