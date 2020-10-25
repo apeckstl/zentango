@@ -6,7 +6,7 @@
 For **DemonHacks 2020 Hack-The-Arts Challenge**. Giving people the ability to be create art during the monotony of life, especially during these trying times.
 
 ## What it does
-You draw portions of a [zentangle](https://zentangle.com/pages/what-is-the-zentangle-method) using the HTML Canvas and associated tools. The images are then combined to create the final (downloadable) product.
+You draw portions of a [zentangle](https://mymodernmet.com/zentangle-art/) using the HTML Canvas and associated tools. The images are then combined to create the final (downloadable) product.
 
 ## How we built it
 We used JavaScript to build the drawing tool, and used HTML/CSS to style the page.
