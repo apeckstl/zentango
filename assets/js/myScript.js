@@ -138,6 +138,7 @@ function nextImage() {
         document.getElementById("zentangle").style.display = "block";
         document.getElementById("save_zentangle").style.display = "inline";
         document.getElementById('drawing-tools').style.display = "none";
+        document.getElementById('weightSlider2').style.display = "none";
     } else {
         // reset drawing canvas
         canvas.width = 400;
