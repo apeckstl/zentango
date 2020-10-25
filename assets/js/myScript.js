@@ -35,7 +35,7 @@ function start() {
 
 // global variables
 var imagearray;
-var centers, radii, xes, yes, circlestart, circleend, shapes;
+var centers, radii, shapes, zen_offsets;
 var imagewidth;
 
 var imageindex = 0;
@@ -59,6 +59,7 @@ function drawStyle(style) {
 function drawWidth(w) {
     width = w;
 }
+
 
 function setColor() {
 	color = document.getElementById('color-btn').value;
@@ -99,36 +100,9 @@ function init() {
         imagewidth = 800 / zentangleSize;
         imagearray = new Array(zentangleSize * zentangleSize);
     } else if (type == 'circle') {
-        centers = [[120,160],[135,265],[250,250],[300,200],[285,115],[220,100]];
-        radii = [40*2.5,95*2.5,40*2.5,95*2.5,50,40,75,60];
-        xes = [centers[0][0],centers[1][0]+21,
-                   centers[0][0],centers[1][0]+21]
-        yes = [centers[0][1],centers[1][1]+152,
-                   centers[0][1],centers[1][1]+152]
-        circlestart = [0.8235*Math.PI,1.58*(Math.PI), // circle 1, circle 2
-                       0.09*(Math.PI),1.33*Math.PI]
-        circleend = [0.087*(Math.PI),1.334*Math.PI,
-                     0.82*Math.PI,1.3348*Math.PI]
-
-                    
-        // for each shape, we need a two item array of the circles that compose it. for each circle, we need
-        // x, y, radius, start, end, direction
-        shapes = [
-            [[centers[0][0],centers[0][1],40*2.5,0.8235*Math.PI,0.087*(Math.PI)],
-            [centers[1][0]+21,centers[1][1]+152,95*2.5,1.58*(Math.PI),1.331*Math.PI,true]],
-
-            [[],[]]
-        ]
-
-        imagearray = new Array(2);
+        imagearray = new Array(shapes.length);
         imagewidth = 400;
         drawShape();
-        
-        // for (let i = 0; i < 6; i++) {
-        //     ctx.beginPath();
-        //     ctx.arc(centers[i][0], centers[i][1], radii[i], 0, 2 * Math.PI);
-        //     ctx.stroke(); 
-        // }
     }
 }
 
@@ -136,10 +110,11 @@ function drawShape() {
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.lineWidth = width;
-    ctx.arc(shapes[imageindex][0][0],shapes[imageindex][0][1],shapes[imageindex][0][2],shapes[imageindex][0][3],shapes[imageindex][0][4],shapes[imageindex][0][5]);
-    ctx.arc(shapes[imageindex][1][0],shapes[imageindex][1][1],shapes[imageindex][1][2],shapes[imageindex][1][3],shapes[imageindex][1][4],shapes[imageindex][1][5]);
+    console.log(imageindex);
+    for (i = 0; i < shapes[imageindex].length; i++) {
+        ctx.arc(shapes[imageindex][i][0],shapes[imageindex][i][1],shapes[imageindex][i][2],shapes[imageindex][i][3],shapes[imageindex][i][4],shapes[imageindex][i][5]);
+    }
     ctx.stroke();
-
     ctx.clip();
 }
 
@@ -156,6 +131,8 @@ function draw() {
 }
 
 function nextImage() {
+    type = getParameterByName("type");
+    zentangleSize = getParameterByName("size");
     var dataURL = canvas.toDataURL();
     imagearray[imageindex] = dataURL;
     console.log("imageindex" + imageindex)
@@ -176,7 +153,7 @@ function nextImage() {
     } else {
         // reset drawing canvas
         canvas.width = 400;
-        if (type = "circle") {
+        if (type == "circle") {
             drawShape();
         }
     }
@@ -194,12 +171,13 @@ function save() {
 
 function generateCircleImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
-
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,800,800);
     for (let i = 0; i < imagearray.length; i++) {
             console.log("drawing")
             var img = new Image();
             img.onload = function () {
-                ctx.drawImage(this, 0, 0, imagewidth, imagewidth);
+                ctx.drawImage(this, zen_offsets[i][0], zen_offsets[i][1], imagewidth, imagewidth);
             }
             img.src = imagearray[i];
         
@@ -208,7 +186,8 @@ function generateCircleImage() {
 
 function generateSquareImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
-
+    ctx.fillStyle = "white" ;
+    ctx.fillRect(0,0,800,800);
     for (i = 0; i < zentangleSize; i++) {
         for (j = 0; j < zentangleSize; j++) {
             var img = new Image();
