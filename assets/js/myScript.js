@@ -140,6 +140,7 @@ function drawShape() {
 }
 
 function draw() {
+    setWeight();
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
@@ -251,9 +252,9 @@ function findxy(res, e) {
     newX = canvascol.x + widthDiff/2;
     newY = canvascol.y + heightDiff/2;
 
-    console.log(canvascol);
-    console.log(widthDiff, heightDiff);
-    console.log(newX, newY);
+    // console.log(canvascol);
+    // console.log(widthDiff, heightDiff);
+    // console.log(newX, newY);
 
 
     // on mouse press, record current coordinates in currX/Y
