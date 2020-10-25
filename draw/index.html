@@ -16,28 +16,27 @@
 
 	<div class="container-fluid h-100">
 		<div class="row justify-content-center" style="padding: 50px 0 50px 0;">
-			<h1>Zentango</h1>
+			<h1 class="draw-header"><a href="/index.html">Zentango</a></h1>
 		</div>
 
-		<div class="row justify-content-center align-items-center">
-			<div class="col d-flex justify-content-end pr-0">
-				<div class="btn-group-vertical mr-0" id="drawing-tools">
-					<input  class="btn btn-info draw-button" type="color" id="color-btn" value="#000000"/> 
-					<button class="btn btn-info draw-button" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
-					<button class="btn btn-info draw-button" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
-					<button class="btn btn-info draw-button" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
+
+		<div class="row justify-content-center">
+			<div class="col d-flex justify-content-center mr-6" id="canvas-col">
+				<div class="my-auto mr-3">
+					<div class="btn-group-vertical mr-0" id="drawing-tools">
+						<input  class="btn btn-info" type="color" id="color-btn" value="#000000"/> 
+						<button class="btn btn-info" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
+						<button class="btn btn-info" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
+						<button class="btn btn-info" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
+					</div>
+					<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
+
+					<div id="color-picker-1"></div>
 				</div>
-				<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
 
-				<div id="color-picker-1"></div>
-			</div>
-
-			<div class="col d-flex justify-content-center" id="canvas-col">
 				<canvas id="canvas" width="400" height="400"></canvas>
 				<canvas id="zentangle" width="800" height="800"></canvas>
 			</div>
-			
-			<div class="col"></div>
 		</div>
 
 		<div class="row align-items-center justify-content-center" style="padding-top: 30px;">
