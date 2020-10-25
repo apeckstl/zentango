@@ -24,16 +24,6 @@ function start() {
     
 }
 
-/*
-1.80, 120, 40
-2. 40, 170, 95
-3. 200, 200, 50
-4. 260, 160, 40
-5. 210, 40, 75
-6. 160, 40, 60
-*/
-
-// global variables
 var imagearray;
 var centers, radii, shapes, zen_offsets;
 var imagewidth;
@@ -108,8 +98,8 @@ function init() {
 
 function drawShape() {
     ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
     console.log(imageindex);
     for (i = 0; i < shapes[imageindex].length; i++) {
         ctx.arc(shapes[imageindex][i][0],shapes[imageindex][i][1],shapes[imageindex][i][2],shapes[imageindex][i][3],shapes[imageindex][i][4],shapes[imageindex][i][5]);
