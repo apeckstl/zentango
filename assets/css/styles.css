@@ -105,7 +105,7 @@ form h3 {
 }
 
 #zentangle {
-    position: absolute;
+    position: relative;
     display: none;
 }
 
@@ -160,4 +160,9 @@ button img {
 
 .mr-6 {  /* Margin-right */
 	margin-right: 4rem !important;
+}
+
+.finalButtons {
+	padding-top: 2em;
+	padding-bottom: 4em;
 }
