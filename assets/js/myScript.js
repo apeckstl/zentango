@@ -221,16 +221,17 @@ function generateSquareImage() {
 function findxy(res, e) {
     // find bootstrap col to determine relative coordinates of canvas
     col         = document.getElementById('canvas-col');
+    mr          = parseInt($("#canvas-col").css("margin-right"))
+    ml          = parseInt($("#canvas-col").css("margin-left"))
+    mt          = parseInt($("#canvas-col").css("margin-top"))
+    mb          = parseInt($("#canvas-col").css("margin-bottom"))
     canvascol   = col.getBoundingClientRect();
-    widthDiff   = canvascol.width - canvas.width;
-    heightDiff  = canvascol.height - canvas.height;
-    newX = canvascol.x + widthDiff/2;
+    widthDiff   = canvascol.width - ml + mr - canvas.width;
+    heightDiff  = canvascol.height - mt + mb - canvas.height;
+    newX = canvascol.x + widthDiff/2 ; 
     newY = canvascol.y + heightDiff/2;
-
-    // console.log(canvascol);
+    // console.log(ml, mt, mr, mb);
     // console.log(widthDiff, heightDiff);
-    // console.log(newX, newY);
-
 
     // on mouse press, record current coordinates in currX/Y
     if (res == 'down') {
