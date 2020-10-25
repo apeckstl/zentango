@@ -20,12 +20,12 @@
 		</div>
 
 		<div class="row justify-content-center align-items-center">
-			<div class="col d-flex justify-content-end pr-0 drawing-tools">
-				<div class="btn-group-vertical mr-0">
-					<input  class="btn btn-info" type="color" id="color-btn" value="#000000"/> 
-					<button class="btn btn-info" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
-					<button class="btn btn-info" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
-					<button class="btn btn-info" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
+			<div class="col d-flex justify-content-end pr-0">
+				<div class="btn-group-vertical mr-0" id="drawing-tools">
+					<input  class="btn btn-info draw-button" type="color" id="color-btn" value="#000000"/> 
+					<button class="btn btn-info draw-button" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
+					<button class="btn btn-info draw-button" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
+					<button class="btn btn-info draw-button" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
 				</div>
 				<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
 
