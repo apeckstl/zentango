@@ -16,23 +16,18 @@
 
 	<div class="container-fluid h-100">
 		<div class="row justify-content-center" style="padding: 50px 0 50px 0;">
-			<h1 class="blahh">Zentango</h1>
+			<h1>Zentango</h1>
 		</div>
 
 		<div class="row justify-content-center align-items-center">
 			<div class="col d-flex justify-content-end pr-0">
 				<div class="btn-group-vertical mr-0">
-					<button class="btn btn-info" onclick=""><img src="../assets/images/paint-brush.svg" /></button>
+					<input  class="btn btn-info" type="color" id="color-btn" value="#000000"/> 
+					<button class="btn btn-info" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
 					<button class="btn btn-info" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
-					<button class="btn btn-info" onclick=""><img src="../assets/images/paint-brush.svg" /></button>
-					<button class="btn btn-info" onclick="toggleWeightSlider()"><img src="../assets/images/diagonal-line.svg" /></button>
-					<!-- <div class="color-palette">	
-						<button type="button" class="btn btn-info"><img src="../assets/images/diagonal-line.svg" /></button>
-						<input  type="color" class="blah" value="#000000"/> 
-					</div> -->
+					<button class="btn btn-info" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
 				</div>
-				<!-- <input id="ex4" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="-3" data-slider-orientation="vertical" data-provide="slider" data/> -->
-				<input id="weightSlider" type="text" name="somename" data-provide="slider" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="disabled">
+				<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
 
 				<div id="color-picker-1"></div>
 			</div>

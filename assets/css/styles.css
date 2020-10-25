@@ -29,6 +29,14 @@ body, html {
 	border-color: var(--deep-champagne);
 }
 
+button + input {
+	padding: 40px 0 40px 0;
+}
+
+.weightSlider {
+	height: 10px !important;
+}
+
 .color-pallete {
 	position: relative;
 	display: inline-block;
@@ -69,7 +77,6 @@ form h3 {
 
 .btn-group-vertical {
 	margin-right: 20px;
-	width: 40px;
 }
 
 .form-check {
@@ -87,10 +94,13 @@ form h3 {
 	box-shadow: 0 10px 10px 2px rgba(68,68,68,0.6);
 }
 
+#id {
+	display: none;
+}
+
 #zentangle {
     position: absolute;
     display: none;
-
 }
 
 button {

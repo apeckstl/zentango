@@ -33,7 +33,7 @@ function start() {
 6. 160, 40, 60
 */
 
-
+// global variables
 var imagearray;
 var centers, radii, xes, yes, circlestart, circleend, shapes;
 var imagewidth;
@@ -58,6 +58,10 @@ function drawStyle(style) {
 
 function drawWidth(w) {
     width = w;
+}
+
+function setColor() {
+	color = document.getElementById('color-btn').value;
 }
 
 function getParameterByName(name) {
@@ -141,6 +145,7 @@ function drawShape() {
 
 function draw() {
     setWeight();
+	setColor();
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
