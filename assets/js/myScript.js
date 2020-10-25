@@ -99,51 +99,9 @@ function init() {
         imagewidth = 800 / zentangleSize;
         imagearray = new Array(zentangleSize * zentangleSize);
     } else if (type == 'circle') {
-        radii = [40*2.5,95*2.5,40*2.5,95*2.5,50,40,75,60];
-        
-        zen_offsets = [[120,360],[120,360],[70,530],[235,465],[],[],[],[],[],[],[]]
-                    
-        // for each shape, we need a two item array of the circles that compose it. for each circle, we need
-        // x, y, radius, start, end, direction
-        shapes = [
-
-            //shape A: circle 1, circle 2
-            [[120,160,40*2,0.8*Math.PI,0.11*(Math.PI),false],
-            [150,370,95*2,1.577*(Math.PI),1.331*Math.PI,true]],
-
-            //shape B: circle 1, circle 2
-            [[120,160,40*2,0.8*Math.PI,0.11*(Math.PI),true],
-            [150,370,95*2,1.577*(Math.PI),1.331*Math.PI,true]],
-
-            //shape C: circle 3, circle 2, circle 1, circle 2
-            [
-            [430,170,50*2,0.665*Math.PI,1.258*Math.PI,false],
-            [200,200,95*2,1.82*(Math.PI),1.579*(Math.PI),true],
-            [170,-10,40*2,0.11*(Math.PI),0.8*Math.PI,false],
-            [200,200,95*2,1.332*(Math.PI),0.096*Math.PI,true]
-            ],
-
-            //shape D: circle 2, circle 3
-            [[35,265,95*2,1.82*Math.PI,0.096*(Math.PI),false],
-            [265,235,50*2,0.665*Math.PI,1.258*Math.PI,false]],
-            
-            //shape E: circle 2, circle 3, circle 4, circle 3
-            [[
-                
-            ]]
-
-            
-        ]
-
         imagearray = new Array(shapes.length);
         imagewidth = 400;
         drawShape();
-        
-        // for (let i = 0; i < 6; i++) {
-        //     ctx.beginPath();
-        //     ctx.arc(centers[i][0], centers[i][1], radii[i], 0, 2 * Math.PI);
-        //     ctx.stroke(); 
-        // }
     }
 }
 
@@ -156,7 +114,6 @@ function drawShape() {
         ctx.arc(shapes[imageindex][i][0],shapes[imageindex][i][1],shapes[imageindex][i][2],shapes[imageindex][i][3],shapes[imageindex][i][4],shapes[imageindex][i][5]);
     }
     ctx.stroke();
-
     ctx.clip();
 }
 
@@ -193,7 +150,7 @@ function nextImage() {
     } else {
         // reset drawing canvas
         canvas.width = 400;
-        if (type = "circle") {
+        if (type == "circle") {
             drawShape();
         }
     }
@@ -211,7 +168,8 @@ function save() {
 
 function generateCircleImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
-
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,800,800);
     for (let i = 0; i < imagearray.length; i++) {
             console.log("drawing")
             var img = new Image();
@@ -225,7 +183,8 @@ function generateCircleImage() {
 
 function generateSquareImage() {
     var ctx = document.getElementById('zentangle').getContext('2d');
-
+    ctx.fillStyle = "white" ;
+    ctx.fillRect(0,0,800,800);
     for (i = 0; i < zentangleSize; i++) {
         for (j = 0; j < zentangleSize; j++) {
             var img = new Image();
