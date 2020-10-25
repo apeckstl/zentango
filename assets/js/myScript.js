@@ -132,13 +132,16 @@ function nextImage() {
             generateCircleImage();
         }
         
+        // change the bootstrap classes for alignment            
+        document.getElementById("canvas-col").className = "col d-flex justify-content-center"
+        document.getElementById("tools-div").className = "my-auto"
         // hide and display the elements on the page
         document.getElementById("canvas").style.display = "none";
         document.getElementById("next_image").style.display = "none";
         document.getElementById("zentangle").style.display = "block";
         document.getElementById("save_zentangle").style.display = "inline";
         document.getElementById('drawing-tools').style.display = "none";
-        document.getElementById('weightSlider2').style.display = "none";
+        document.getElementById('weightSlider').style.display = "none";
     } else {
         // reset drawing canvas
         canvas.width = 400;
@@ -221,12 +224,15 @@ function generateSquareImage() {
 function findxy(res, e) {
     // find bootstrap col to determine relative coordinates of canvas
     col         = document.getElementById('canvas-col');
+    mr          = parseInt($("#canvas-col").css("margin-right"))
+    ml          = parseInt($("#canvas-col").css("margin-left"))
+    mt          = parseInt($("#canvas-col").css("margin-top"))
+    mb          = parseInt($("#canvas-col").css("margin-bottom"))
     canvascol   = col.getBoundingClientRect();
-    widthDiff   = canvascol.width - canvas.width;
-    heightDiff  = canvascol.height - canvas.height;
-    newX = canvascol.x + widthDiff/2;
+    widthDiff   = canvascol.width - ml + mr - canvas.width;
+    heightDiff  = canvascol.height - mt + mb - canvas.height;
+    newX = canvascol.x + widthDiff/2 ; 
     newY = canvascol.y + heightDiff/2;
-
 
     // on mouse press, record current coordinates in currX/Y
     if (res == 'down') {
@@ -262,5 +268,14 @@ function findxy(res, e) {
             currY = e.clientY - newY;
             draw();
         }
+    }
+}
+
+function toggleChunks(el) {
+    var chunk = document.getElementById("chunk-count");
+    if (el.value == "circle") {
+        chunk.disabled = true;
+    } else {
+        chunk.disabled = false;
     }
 }

@@ -23,10 +23,54 @@ body, html {
 	background-color: var(--green-sheen);
 }
 
+.jumbotron {
+	width: 50%;
+	margin-bottom: 0;
+	background: rgb(108,112,147);
+	background: radial-gradient(circle, rgb(70, 73, 104) 0%, rgba(58,61,89,1) 100%);
+	/* background-color: var(--independence); */
+	color: #FFF;
+}
+div.jumbotron h2 {
+	font-size: 1.3em;
+}
+p a {
+	color: var(--deep-champagne);
+}
+p a:hover {
+	color: var(--terra-cotta)
+}
+.card-custom {
+	background-color: #F8F8F8;
+}
+
 .btn-info {
 	color: #000;
 	background-color: var(--deep-champagne);
 	border-color: var(--deep-champagne);
+}
+.btn-info:hover {
+	background-color: var(--terra-cotta);
+	border-color: var(--terra-cotta);
+}
+.btn.btn-info.focus,
+.btn.btn-info:focus {
+	background-color: var(--terra-cotta);
+	border-color: var(--terra-cotta);
+}
+.btn.btn-info.active,
+.btn.btn-info:active {
+	background-color: var(--terra-cotta);
+	border-color: var(--terra-cotta);
+}
+.btn.btn-info.active.focus,
+.btn.btn-info.active:focus,
+.btn.btn-info.active:hover,
+.btn.btn-info:active.focus,
+.btn.btn-info:active:focus,
+.btn.btn-info:active:hover {
+	background-color: var(--terra-cotta);
+	border-color: var(--terra-cotta);
 }
 
 button + input {
@@ -42,25 +86,6 @@ button + input {
 	display: inline-block;
 }
 
-.blah {
-	display: inline-block;
-	font-weight: 400;
-	color: #000;
-	text-align: center;
-	vertical-align: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-color: var(--deep-champagne);
-	border: 1px solid transparent;
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	line-height: 1.5;
-	border-radius: 0.25rem;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
 h1 {
     font-family: 'Cairo', sans-serif;
     font-size: 3em;
@@ -69,7 +94,6 @@ h1 {
 h1.draw-header a, h1.draw-header a:hover {
 	color: #000;
 	text-decoration: none;
-
 }
 
 h2 {
@@ -105,7 +129,7 @@ form h3 {
 }
 
 #zentangle {
-    position: absolute;
+    position: relative;
     display: none;
 }
 
@@ -159,5 +183,14 @@ button img {
 }
 
 .mr-6 {  /* Margin-right */
-	margin-right: 4rem !important;
+	margin-right: 4rem;
+}
+
+.finalButtons {
+	padding-top: 2em;
+	padding-bottom: 4em;
+}
+
+.tooltip {
+
 }

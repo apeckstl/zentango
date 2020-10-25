@@ -22,14 +22,14 @@
 
 		<div class="row justify-content-center">
 			<div class="col d-flex justify-content-center mr-6" id="canvas-col">
-				<div class="my-auto mr-3">
+				<div class="my-auto mr-3" id="tools-div">
 					<div class="btn-group-vertical mr-0" id="drawing-tools">
 						<input  class="btn btn-info" type="color" id="color-btn" value="#000000"/> 
 						<button class="btn btn-info" onclick="drawStyle('draw')"><img src="../assets/images/paint-brush.svg" /></button>
 						<button class="btn btn-info" onclick="drawStyle('line')"><img src="../assets/images/diagonal-line.svg" /></button>
 						<button class="btn btn-info" onclick="toggleWeightSlider()"><img src="../assets/images/stroke-width.svg" /></button>
 					</div>
-					<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
+					<input data-slider-id="weightSlider" id="weightSlider2" type="text" name="weightslide" data-provide="slider" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="1" data-slider-tooltip="show" data-slider-tooltip-position="left" data-slider-orientation="vertical" data-toggle="enabled" data-slider-reversed="true">
 
 					<div id="color-picker-1"></div>
 				</div>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 
-		<div class="row align-items-center justify-content-center" style="padding-top: 30px;">
+		<div class="row align-items-center justify-content-center finalButtons">
 			<button class="btn btn-info" id="next_image" onclick="nextImage()">Next Image</button>
 			<button class="btn btn-info" id="save_zentangle" onclick="save()">Save Your Zentangle</button>
 		</div>

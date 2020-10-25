@@ -14,40 +14,42 @@
 	<body>
 
 	<div class="container h-100">
-		<div class="jumbotron text-center">
-			<h1>Zentango</h1>
-			<h5><em>where all your base are belong to us</em></h5>
-			<p>
-				<a href="https://zentangle.com/pages/what-is-the-zentangle-method">What is a Zentangle?</a>
-			</p>
+		<div class="row justify-content-center align-items-center">
+			<div class="jumbotron text-center">
+				<h1>Zentango</h1>
+				<h2><em>An easy way to bring a creative spark to your next coffee break.</em></h2>
+				<p>
+					<a href="https://mymodernmet.com/zentangle-art/">What is a Zentangle?</a>
+				</p>
+			</div>
 		</div>
 
-		<div class="row justify-content-center">
-			<div class="card">
+		<div class="row justify-content-center align-items-center">
+			<div class="card card-custom">
 				<div class="card-header text-center">
 					Select a Template:
 				</div>
 				<div class="card-body d-flex align-items-center justify-content-center">
 					<form>
 						<label>
-							<input type="radio" name="template-radio" value="square" checked>
+							<input type="radio" name="template-radio" value="square" onclick="toggleChunks(this)" checked>
 							<img src="./assets/images/square-template-icon.png">
 						</label>
 						
 						<label>
-							<input type="radio" name="template-radio" value="circle">
+							<input type="radio" name="template-radio" value="circle" onclick="toggleChunks(this)">
 							<img src="./assets/images/circle-template-icon.png">
 						</label>
 
 						<hr>
 
-						<h3 class="card-title text-center"># Chunks</h3>
+						<h3 class="card-title text-center"># of Tiles</h3>
 						<select class="form-control" id="chunk-count">
 							<option>4</option>
 							<option>16</option>
 							<option>64</option>
 						</select>
-						<button style="margin-top:1em;" id="startbutton" class="btn btn-md btn-primary btn-block" onclick="start()" type="reset">Begin</button>
+						<button style="margin-top:1em;" id="startbutton" class="btn btn-md btn-info btn-block" onclick="start()" type="reset">Begin</button>
 					</form>
 				</div> <!-- end of card-body -->
 			</div> <!-- end of card -->
