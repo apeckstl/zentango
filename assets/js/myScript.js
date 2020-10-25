@@ -33,7 +33,7 @@ function start() {
 6. 160, 40, 60
 */
 
-
+// global variables
 var imagearray;
 var centers, radii, shapes, zen_offsets;
 var imagewidth;
@@ -60,8 +60,9 @@ function drawWidth(w) {
     width = w;
 }
 
-function drawColor(c) {
-    color = c;
+
+function setColor() {
+	color = document.getElementById('color-btn').value;
 }
 
 function getParameterByName(name) {
@@ -118,6 +119,8 @@ function drawShape() {
 }
 
 function draw() {
+    setWeight();
+	setColor();
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
@@ -225,12 +228,25 @@ function generateSquareImage() {
 }
 
 function findxy(res, e) {
+    // find bootstrap col to determine relative coordinates of canvas
+    col         = document.getElementById('canvas-col');
+    canvascol   = col.getBoundingClientRect();
+    widthDiff   = canvascol.width - canvas.width;
+    heightDiff  = canvascol.height - canvas.height;
+    newX = canvascol.x + widthDiff/2;
+    newY = canvascol.y + heightDiff/2;
+
+    // console.log(canvascol);
+    // console.log(widthDiff, heightDiff);
+    // console.log(newX, newY);
+
+
     // on mouse press, record current coordinates in currX/Y
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
-        currX = e.clientX - canvas.offsetLeft;
-        currY = e.clientY - canvas.offsetTop;
+        currX = e.clientX - newX;
+        currY = e.clientY - newY;
 
         //turn on flag for continuous draw
         if (mode == 'draw') {
@@ -242,8 +258,8 @@ function findxy(res, e) {
         //release draws the straight line
         prevX = currX;
         prevY = currY;
-        currX = e.clientX - canvas.offsetLeft;
-        currY = e.clientY - canvas.offsetTop;
+        currX = e.clientX - newX;
+        currY = e.clientY - newY;
         draw();
     }
     if (res == 'up' || res == "out") {
@@ -255,8 +271,8 @@ function findxy(res, e) {
         if (flag) {
             prevX = currX;
             prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
+            currX = e.clientX - newX;
+            currY = e.clientY - newY;
             draw();
         }
     }
