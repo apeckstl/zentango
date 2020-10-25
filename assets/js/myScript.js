@@ -135,6 +135,9 @@ function nextImage() {
             generateCircleImage();
         }
         
+        // change the bootstrap classes for alignment            
+        document.getElementById("canvas-col").className = "col d-flex justify-content-center"
+        document.getElementById("tools-div").className = "my-auto"
         // hide and display the elements on the page
         document.getElementById("canvas").style.display = "none";
         document.getElementById("next_image").style.display = "none";
