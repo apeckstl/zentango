@@ -268,3 +268,12 @@ function findxy(res, e) {
         }
     }
 }
+
+function toggleChunks(el) {
+    var chunk = document.getElementById("chunk-count");
+    if (el.value == "circle") {
+        chunk.disabled = true;
+    } else {
+        chunk.disabled = false;
+    }
+}
