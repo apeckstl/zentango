@@ -66,6 +66,12 @@ h1 {
     font-size: 3em;
 }
 
+h1.draw-header a, h1.draw-header a:hover {
+	color: #000;
+	text-decoration: none;
+
+}
+
 h2 {
 	font-size: 2em;
 }
@@ -150,4 +156,8 @@ button img {
 /* CHECKED STYLES */
 [type=radio]:checked + img {
 	box-shadow: 0 0 0 2pt #80dfff;
+}
+
+.mr-6 {  /* Margin-right */
+	margin-right: 4rem !important;
 }
